@@ -61,9 +61,15 @@ function startGame() {
     player.height
   );
 
-  setInterval(() => drawEnemies(enemies), 1234);
-  setInterval(() => drawHealthKits(healthKits), 15000);
-  setInterval(() => fire(bullets), 200);
+  setInterval(() => {
+    drawEnemies(enemies);
+  }, 1234);
+  setInterval(() => {
+    drawHealthKits(healthKits);
+  }, 15000);
+  setInterval(() => {
+    fire(bullets);
+  }, 200);
 
   function animate() {
     requestAnimationFrame(animate);
