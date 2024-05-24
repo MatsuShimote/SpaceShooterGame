@@ -24,7 +24,7 @@ const healthKit = {
   img: new Image(),
 };
 
-healthKit.img.src = "https://image.ibb.co/gFvSEU/first_aid_kit.png";
+healthKit.img.src = "imgs/healthkit.png";
 enemy.img.src = "https://i.ibb.co/0YgHvmx/enemy-fotor-20230927153748.png";
 player.img.src = "imgs/fat.png";
 // player.img.src = "https://image.ibb.co/dfbD1U/heroShip.png";
