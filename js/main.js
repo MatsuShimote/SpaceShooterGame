@@ -25,8 +25,8 @@ const healthKit = {
 };
 
 healthKit.img.src = "imgs/healthkit.png";
-enemy.img.src = "https://i.ibb.co/0YgHvmx/enemy-fotor-20230927153748.png";
-player.img.src = "imgs/fat.png";
+enemy.img.src = "imgs/bodybuilder.png";
+player.img.src = "imgs/hero.png";
 // player.img.src = "https://image.ibb.co/dfbD1U/heroShip.png";
 
 window.onerror = () => {
@@ -76,7 +76,7 @@ function startGame() {
 
     ctx.beginPath();
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "Black";
     ctx.fillText("Health: " + health, 5, 20);
     ctx.fillText("Score: " + score, window.innerWidth - 100, 20);
 

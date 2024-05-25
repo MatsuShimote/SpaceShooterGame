@@ -28,7 +28,7 @@ function drawEnemies(enemies) {
   }
 }
 
-function drawHealthKits(healthKit) {
+function drawHealthKits(healthKits) {
   for (let _ = 0; _ < 1; _++) {
     const x = Math.random() * (window.innerWidth - enemy.width);
     const y = -enemy.height;
