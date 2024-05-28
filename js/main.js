@@ -1,3 +1,8 @@
+const keyboard = {
+  x: window.innerWidth /2,
+  y: window.innerHeight -33,
+};
+
 const mouse = {
   x: window.innerWidth / 2,
   y: window.innerHeight - 33,
@@ -41,9 +46,18 @@ canvas.height = window.innerHeight;
 
 ctx.font = "1em Arial";
 
-canvas.addEventListener("mousemove", (event) => {
-  mouse.x = event.clientX;
-});
+// canvas.addEventListener("mousemove", (event) => {
+//   mouse.x = event.clientX;
+// });
+
+this.document.addEventListener("keydown", (e) => {
+  if(e.code === "ArrowRight" || e.code === "KeyD") {
+    keyboard.x += 20;
+  }else if(e.code === "ArrowLeft" || e.code == "KeyA") {
+    keyboard.x -= 20;
+  }
+  
+}) 
 
 function startGame() {
   let score = 0;
@@ -60,6 +74,7 @@ function startGame() {
     player.width,
     player.height
   );
+
 
   setInterval(() => {
     drawEnemies(enemies);

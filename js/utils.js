@@ -9,8 +9,8 @@ function collision(a, b) {
 
 function fire(bullets) {
   for (let _ = 0; _ < 1; _++) {
-    const x = mouse.x - bullet.width / 2;
-    const y = mouse.y - player.height;
+    const x = keyboard.x - bullet.width / 2;
+    const y = keyboard.y - player.height;
 
     bullets.push(
       new Bullet(ctx, x, y, bullet.width, bullet.height, bullet.speed)
