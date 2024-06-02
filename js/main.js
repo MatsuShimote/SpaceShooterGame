@@ -1,10 +1,10 @@
 const keyboard = {
-  x: window.innerWidth / 2,
+  x: 750 / 2,
   y: window.innerHeight - 33,
 };
 
 const mouse = {
-  x: window.innerWidth / 2,
+  x: 750 / 2,
   y: window.innerHeight - 33,
 };
 

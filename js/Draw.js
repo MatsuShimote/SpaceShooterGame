@@ -62,7 +62,7 @@ class Draw {
 
   static enemy() {
     for (let _ = 0; _ < 4; _++) {
-      const x = Math.random() * (window.innerWidth - enemy.width);
+      const x = Math.random() * (750 - enemy.width);
       const y = -enemy.height;
       const speed = Math.random() * 2;
 
@@ -71,7 +71,7 @@ class Draw {
   }
 
   static healthKit() {
-    const x = Math.random() * (window.innerWidth - enemy.width);
+    const x = Math.random() * (750 - enemy.width);
     const y = -enemy.height;
     const speed = Math.random() * 2.6;
 
