@@ -46,18 +46,22 @@ canvas.height = window.innerHeight;
 
 ctx.font = "1em Arial";
 
-// canvas.addEventListener("mousemove", (event) => {
-//   mouse.x = event.clientX;
-// });
+const playerMinX = 0;
+const playerMaxX = canvas.width - player.width;
 
-this.document.addEventListener("keydown", (e) => {
-  if(e.code === "ArrowRight" || e.code === "KeyD") {
+document.addEventListener("keydown", (e) => {
+  if (e.code === "ArrowRight" || e.code === "KeyD") {
     keyboard.x += 20;
-  }else if(e.code === "ArrowLeft" || e.code == "KeyA") {
+  } else if (e.code === "ArrowLeft" || e.code == "KeyA") {
     keyboard.x -= 20;
   }
-  
-}) 
+
+  if (keyboard.x < playerMinX) {
+    keyboard.x = playerMinX;
+  } else if (keyboard.x > playerMaxX) {
+    keyboard.x = playerMaxX;
+  }
+});
 
 function startGame() {
   let score = 0;
@@ -74,7 +78,6 @@ function startGame() {
     player.width,
     player.height
   );
-
 
   setInterval(() => {
     drawEnemies(enemies);
@@ -110,9 +113,9 @@ function startGame() {
 
       if (enemies[k].y > innerHeight) {
         enemies.splice(k, 1);
-        health -= 10;
+        health -= 5;
 
-        if (health === 0) {
+        if (health <= 0) {
           alert("You DIED!\nYour score was " + score);
           startGame();
         }
