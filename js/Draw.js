@@ -17,7 +17,14 @@ class Draw {
       }
 
       if (number === 2) {
-        new CoxinhaBullet(ctx, x, y, bullet.width, bullet.height, bullet.speed);
+        return new CoxinhaBullet(
+          ctx,
+          x,
+          y,
+          bullet.width,
+          bullet.height,
+          bullet.speed
+        );
       }
 
       if (number === 3) {
