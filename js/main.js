@@ -9,9 +9,10 @@ const mouse = {
 };
 
 const bullet = {
-  width: 6,
-  height: 6,
+  width: 30,
+  height: 30,
   speed: 10,
+  img: new Image(),
 };
 const enemy = {
   width: 32,

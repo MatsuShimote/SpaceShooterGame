@@ -1,11 +1,12 @@
 class Player {
-  constructor(ctx, x, y, width, height, keyboard) {
+  constructor(ctx, x, y, width, height, keyboard, speed) {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
     this.width = width;
     this.height = height;
     this.keyboard = keyboard;
+    this.speed = speed;
   }
 
   draw() {
@@ -18,6 +19,7 @@ class Player {
   }
 
   update() {
+    this.x -= this.speed;
     this.draw();
   }
 }
