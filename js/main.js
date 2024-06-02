@@ -88,8 +88,7 @@ function startGame() {
   }, 15000);
 
   setInterval(() => {
-    // console.log({ bullets });
-    // bullets.push(Draw.bullet());
+    bullets.push(Draw.bullet());
   }, 200);
 
   function animate() {
