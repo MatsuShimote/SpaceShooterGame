@@ -1,12 +1,18 @@
+const keyboard = {
+  x: window.innerWidth /2,
+  y: window.innerHeight -33,
+};
+
 const mouse = {
   x: window.innerWidth / 2,
   y: window.innerHeight - 33,
 };
 
 const bullet = {
-  width: 6,
-  height: 6,
+  width: 30,
+  height: 30,
   speed: 10,
+  img: new Image(),
 };
 const enemy = {
   width: 32,
@@ -24,9 +30,9 @@ const healthKit = {
   img: new Image(),
 };
 
-healthKit.img.src = "https://image.ibb.co/gFvSEU/first_aid_kit.png";
-enemy.img.src = "https://i.ibb.co/0YgHvmx/enemy-fotor-20230927153748.png";
-player.img.src = "imgs/fat.png";
+healthKit.img.src = "imgs/healthkit.png";
+enemy.img.src = "imgs/bodybuilder.png";
+player.img.src = "imgs/hero.png";
 // player.img.src = "https://image.ibb.co/dfbD1U/heroShip.png";
 
 window.onerror = () => {
@@ -41,8 +47,21 @@ canvas.height = window.innerHeight;
 
 ctx.font = "1em Arial";
 
-canvas.addEventListener("mousemove", (event) => {
-  mouse.x = event.clientX;
+const playerMinX = 0;
+const playerMaxX = canvas.width - player.width;
+
+document.addEventListener("keydown", (e) => {
+  if (e.code === "ArrowRight" || e.code === "KeyD") {
+    keyboard.x += 20;
+  } else if (e.code === "ArrowLeft" || e.code == "KeyA") {
+    keyboard.x -= 20;
+  }
+
+  if (keyboard.x < playerMinX) {
+    keyboard.x = playerMinX;
+  } else if (keyboard.x > playerMaxX) {
+    keyboard.x = playerMaxX;
+  }
 });
 
 function startGame() {
@@ -76,7 +95,7 @@ function startGame() {
 
     ctx.beginPath();
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "Black";
     ctx.fillText("Health: " + health, 5, 20);
     ctx.fillText("Score: " + score, window.innerWidth - 100, 20);
 
@@ -95,9 +114,9 @@ function startGame() {
 
       if (enemies[k].y > innerHeight) {
         enemies.splice(k, 1);
-        health -= 10;
+        health -= 5;
 
-        if (health === 0) {
+        if (health <= 0) {
           alert("You DIED!\nYour score was " + score);
           startGame();
         }
