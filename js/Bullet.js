@@ -6,12 +6,12 @@ class Bullet {
     this.width = width;
     this.height = height;
     this.speed = speed;
-    bullet.img = img;
+    this.img = img;
   }
 
   draw() {
     this.ctx.beginPath();
-    this.ctx.drawImage(bullet.img, this.x, this.y, this.width, this.height);
+    this.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
   update() {
