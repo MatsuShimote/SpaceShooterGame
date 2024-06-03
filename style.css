@@ -9,3 +9,7 @@ body {
     height: 100vh;
     margin: 0;
 }
+
+canvas {
+    margin: 0 auto;
+}

@@ -1,10 +1,10 @@
 const keyboard = {
-  x: window.innerWidth /2,
-  y: window.innerHeight -33,
+  x: 750 / 2,
+  y: window.innerHeight - 33,
 };
 
 const mouse = {
-  x: window.innerWidth / 2,
+  x: 750 / 2,
   y: window.innerHeight - 33,
 };
 
@@ -33,7 +33,6 @@ const healthKit = {
 healthKit.img.src = "imgs/healthkit.png";
 enemy.img.src = "imgs/bodybuilder.png";
 player.img.src = "imgs/hero.png";
-// player.img.src = "https://image.ibb.co/dfbD1U/heroShip.png";
 
 window.onerror = () => {
   return true;
@@ -42,7 +41,7 @@ window.onerror = () => {
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
+canvas.width = 750;
 canvas.height = window.innerHeight;
 
 ctx.font = "1em Arial";
@@ -53,7 +52,7 @@ const playerMaxX = canvas.width - player.width;
 document.addEventListener("keydown", (e) => {
   if (e.code === "ArrowRight" || e.code === "KeyD") {
     keyboard.x += 20;
-  } else if (e.code === "ArrowLeft" || e.code == "KeyA") {
+  } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
     keyboard.x -= 20;
   }
 
@@ -81,13 +80,15 @@ function startGame() {
   );
 
   setInterval(() => {
-    drawEnemies(enemies);
+    enemies.push(Draw.enemy());
   }, 1234);
+
   setInterval(() => {
-    drawHealthKits(healthKits);
+    healthKits.push(Draw.healthKit());
   }, 15000);
+
   setInterval(() => {
-    fire(bullets);
+    bullets.push(Draw.bullet());
   }, 200);
 
   function animate() {
