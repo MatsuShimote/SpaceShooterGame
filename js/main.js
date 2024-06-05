@@ -33,6 +33,8 @@ const healthKit = {
 healthKit.img.src = "imgs/healthkit.png";
 player.img.src = "imgs/hero.png";
 const kitAudio = new Audio("audio/healthKit.mp3");
+const killAudio = new Audio("audio/kill.mp3");
+const fireAudio = new Audio("audio/fire.mp3");
 const gameOver = new Audio("audio/gameOver.mp3");
 const bckgMusic = new Audio("audio/background.m4a");
 
@@ -69,6 +71,9 @@ function startGame() {
   let score = 0;
   let health = 100;
 
+  fireAudio.play();
+  fireAudio.loop = true;
+
   const enemies = [];
   const healthKits = [];
   const bullets = [];
@@ -104,14 +109,11 @@ function startGame() {
 
     __player.update();
 
-    const audio = new Audio("audio/fire.mp3");
     for (let i = 0; i < bullets.length; i++) {
       bullets[i].update();
 
       if (bullets[i].y < 0) {
         bullets.splice(i, 1);
-        const fireAudio = new Audio("audio/fire.mp3");
-        fireAudio.play();
       }
     }
 
@@ -136,9 +138,10 @@ function startGame() {
           enemies.splice(j, 1);
           bullets.splice(l, 1);
 
-          const killAudio = new Audio("audio/kill.mp3");
           killAudio.play();
-
+          // setTimeout(() => {
+          //   killAudio.pause();
+          // }, 1200);
           score++;
         }
       }
@@ -162,5 +165,3 @@ function startGame() {
 
   animate();
 }
-
-window.onload = startGame;
