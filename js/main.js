@@ -8,22 +8,26 @@ const mouse = {
   y: window.innerHeight - 33,
 };
 
+// TODO: move this
 const bullet = {
   width: 30,
   height: 30,
   speed: 10,
   img: new Image(),
 };
+// TODO: move this
 const enemy = {
   width: 32,
   height: 32,
   img: new Image(),
 };
+// TODO: move this
 const player = {
   height: 32,
   width: 32,
   img: new Image(),
 };
+// TODO: move this
 const healthKit = {
   width: 32,
   height: 32,

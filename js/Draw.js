@@ -84,6 +84,6 @@ class Draw {
     const y = -enemy.height;
     const speed = Math.random() * 2.6;
 
-    return new HealthKit(ctx, x, y, healthKit.width, healthKit.height, speed);
+    return new HealthKit(x, y, healthKit.width, healthKit.height, speed);
   }
 }
