@@ -8,22 +8,26 @@ const mouse = {
   y: window.innerHeight - 33,
 };
 
+// TODO: move this
 const bullet = {
   width: 30,
   height: 30,
   speed: 10,
   img: new Image(),
 };
+// TODO: move this
 const enemy = {
   width: 32,
   height: 32,
   img: new Image(),
 };
+// TODO: move this
 const player = {
   height: 32,
   width: 32,
   img: new Image(),
 };
+// TODO: move this
 const healthKit = {
   width: 32,
   height: 32,
@@ -31,9 +35,10 @@ const healthKit = {
 };
 
 healthKit.img.src = "imgs/healthkit.png";
-enemy.img.src = "imgs/bodybuilder.png";
 player.img.src = "imgs/hero.png";
 const kitAudio = new Audio("audio/healthKit.mp3");
+const killAudio = new Audio("audio/kill.mp3");
+const fireAudio = new Audio("audio/fire.mp3");
 const gameOver = new Audio("audio/gameOver.mp3");
 const bckgMusic = new Audio("audio/background.m4a");
 
@@ -67,9 +72,11 @@ document.addEventListener("keydown", (e) => {
 });
 
 function startGame() {
-
   let score = 0;
   let health = 100;
+
+  fireAudio.play();
+  fireAudio.loop = true;
 
   const enemies = [];
   const healthKits = [];
@@ -106,14 +113,11 @@ function startGame() {
 
     __player.update();
 
-    const audio = new Audio("audio/fire.mp3");
     for (let i = 0; i < bullets.length; i++) {
       bullets[i].update();
 
       if (bullets[i].y < 0) {
         bullets.splice(i, 1);
-        const fireAudio = new Audio("audio/fire.mp3");
-        fireAudio.play();
       }
     }
 
@@ -138,9 +142,10 @@ function startGame() {
           enemies.splice(j, 1);
           bullets.splice(l, 1);
 
-          const killAudio = new Audio("audio/kill.mp3");
           killAudio.play();
-
+          // setTimeout(() => {
+          //   killAudio.pause();
+          // }, 1200);
           score++;
         }
       }
@@ -165,4 +170,13 @@ function startGame() {
   animate();
 }
 
-window.onload = startGame;
+document.addEventListener(
+  "click",
+  () => {
+    const menu = document.querySelector(".menu");
+
+    menu.remove();
+    startGame();
+  },
+  false
+);
