@@ -1,3 +1,6 @@
+import Player from "./Player.js";
+import Draw from "./Draw.js";
+
 const keyboard = {
   x: 750 / 2,
   y: window.innerHeight - 33,

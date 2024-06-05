@@ -17,3 +17,5 @@ class HealthKit {
     this.draw();
   }
 }
+
+export default HealthKit;

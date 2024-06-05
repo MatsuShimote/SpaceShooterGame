@@ -23,3 +23,5 @@ class Player {
     this.draw();
   }
 }
+
+export default Player;

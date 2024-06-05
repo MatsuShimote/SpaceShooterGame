@@ -19,3 +19,5 @@ class Enemy {
     this.draw();
   }
 }
+
+export default Enemy;

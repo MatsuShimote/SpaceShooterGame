@@ -19,3 +19,5 @@ class Bullet {
     this.draw();
   }
 }
+
+export default Bullet;

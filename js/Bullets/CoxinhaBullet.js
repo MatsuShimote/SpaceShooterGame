@@ -1,3 +1,5 @@
+import Bullet from "./Bullet.js";
+
 class CoxinhaBullet extends Bullet {
   constructor(ctx, x, y, width, height, speed) {
     const img = new Image();
@@ -5,3 +7,5 @@ class CoxinhaBullet extends Bullet {
     super(ctx, x, y, width, height, speed, img);
   }
 }
+
+export default CoxinhaBullet;

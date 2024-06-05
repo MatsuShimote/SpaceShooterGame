@@ -1,4 +1,4 @@
-function collision(a, b) {
+export function collision(a, b) {
   return (
     a.x < b.x + b.width &&
     a.x + a.width > b.x &&
@@ -7,6 +7,6 @@ function collision(a, b) {
   );
 }
 
-function randomNumber(min, max) {
+export function randomNumber(min, max) {
   return Math.floor(Math.random() * (max + 1 - min) + min);
 }

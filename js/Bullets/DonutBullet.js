@@ -1,3 +1,5 @@
+import Bullet from "./Bullet.js";
+
 class DonutBullet extends Bullet {
   constructor(ctx, x, y, width, height, speed) {
     const img = new Image();
@@ -5,3 +7,5 @@ class DonutBullet extends Bullet {
     super(ctx, x, y, width, height, speed, img);
   }
 }
+
+export default DonutBullet;

@@ -1,3 +1,14 @@
+import HealthKit from "./HealthKit.js";
+import Cariri from "./Enemies/Cariri.js";
+import Mamau from "./Enemies/Mamau.js";
+import Xuliao from "./Enemies/Xuliao.js";
+import BurguerBullet from "./Bullets/BurguerBullet.js";
+import CoxinhaBullet from "./Bullets/CoxinhaBullet.js";
+import DonutBullet from "./Bullets/DonutBullet.js";
+import MilkshakeBullet from "./Bullets/MilkshakeBullet.js";
+import PizzaBullet from "./Bullets/PizzaBullet.js";
+import { randomNumber } from "./utils.js";
+
 class Draw {
   static bullet() {
     const number = randomNumber(1, 5);
@@ -87,3 +98,5 @@ class Draw {
     return new HealthKit(x, y, healthKit.width, healthKit.height, speed);
   }
 }
+
+export default Draw;
