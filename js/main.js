@@ -165,3 +165,14 @@ function startGame() {
 
   animate();
 }
+
+document.addEventListener(
+  "click",
+  () => {
+    const menu = document.querySelector(".menu");
+
+    menu.remove();
+    startGame();
+  },
+  false
+);
