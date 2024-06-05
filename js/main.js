@@ -31,7 +31,7 @@ const healthKit = {
 };
 
 healthKit.img.src = "imgs/healthkit.png";
-enemy.img.src = "imgs/bodybuilder.png";
+// enemy.img.src = "imgs/enemies/bodybuilder.png";
 player.img.src = "imgs/hero.png";
 const kitAudio = new Audio("audio/healthKit.mp3");
 const gameOver = new Audio("audio/gameOver.mp3");
