@@ -31,7 +31,6 @@ const healthKit = {
 };
 
 healthKit.img.src = "imgs/healthkit.png";
-// enemy.img.src = "imgs/enemies/bodybuilder.png";
 player.img.src = "imgs/hero.png";
 const kitAudio = new Audio("audio/healthKit.mp3");
 const gameOver = new Audio("audio/gameOver.mp3");
@@ -67,7 +66,6 @@ document.addEventListener("keydown", (e) => {
 });
 
 function startGame() {
-
   let score = 0;
   let health = 100;
 
