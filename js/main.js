@@ -65,7 +65,7 @@ function startGame() {
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     ctx.fillStyle = "Black";
     ctx.fillText("Health: " + health, 5, 20);
-    ctx.fillText("Score: " + score, window.innerWidth - 100, 20);
+    ctx.fillText("Score: " + score, canvas.width - 100, 20);
 
     __player.update();
 
