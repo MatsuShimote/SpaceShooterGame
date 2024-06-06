@@ -1,46 +1,13 @@
-const keyboard = {
-  x: 750 / 2,
-  y: window.innerHeight - 33,
-};
+import Player from "./Player.js";
+import Draw from "./Draw.js";
+import Keyboard from "./Keyboard.js";
+import { collision } from "./utils.js";
 
-const mouse = {
-  x: 750 / 2,
-  y: window.innerHeight - 33,
-};
-
-// TODO: move this
-const bullet = {
-  width: 30,
-  height: 30,
-  speed: 10,
-  img: new Image(),
-};
-// TODO: move this
-const enemy = {
-  width: 32,
-  height: 32,
-  img: new Image(),
-};
-// TODO: move this
-const player = {
-  height: 32,
-  width: 32,
-  img: new Image(),
-};
-// TODO: move this
-const healthKit = {
-  width: 32,
-  height: 32,
-  img: new Image(),
-};
-
-healthKit.img.src = "imgs/healthkit.png";
-player.img.src = "imgs/hero.png";
 const kitAudio = new Audio("audio/healthKit.mp3");
 const killAudio = new Audio("audio/kill.mp3");
 const fireAudio = new Audio("audio/fire.mp3");
 const gameOver = new Audio("audio/gameOver.mp3");
-const bckgMusic = new Audio("audio/background.m4a");
+// const bckgMusic = new Audio("audio/background.m4a");
 
 window.onerror = () => {
   return true;
@@ -54,20 +21,15 @@ canvas.height = window.innerHeight;
 
 ctx.font = "1em Arial";
 
-const playerMinX = 0;
-const playerMaxX = canvas.width - player.width;
+const k = new Keyboard(0 + Player.width, canvas.width - Player.width);
 
 document.addEventListener("keydown", (e) => {
   if (e.code === "ArrowRight" || e.code === "KeyD") {
-    keyboard.x += 20;
-  } else if (e.code === "ArrowLeft" || e.code === "KeyA") {
-    keyboard.x -= 20;
+    k.toRight();
   }
 
-  if (keyboard.x < playerMinX) {
-    keyboard.x = playerMinX;
-  } else if (keyboard.x > playerMaxX) {
-    keyboard.x = playerMaxX;
+  if (e.code === "ArrowLeft" || e.code === "KeyA") {
+    k.toLeft();
   }
 });
 
@@ -82,24 +44,18 @@ function startGame() {
   const healthKits = [];
   const bullets = [];
 
-  const __player = new Player(
-    ctx,
-    mouse.x,
-    mouse.y,
-    player.width,
-    player.height
-  );
+  const __player = new Player(ctx);
 
   setInterval(() => {
-    enemies.push(Draw.enemy());
+    enemies.push(Draw.enemy(ctx));
   }, 1234);
 
   setInterval(() => {
-    healthKits.push(Draw.healthKit());
+    healthKits.push(Draw.healthKit(ctx));
   }, 15000);
 
   setInterval(() => {
-    bullets.push(Draw.bullet());
+    bullets.push(Draw.bullet(ctx));
   }, 200);
 
   function animate() {
@@ -143,9 +99,6 @@ function startGame() {
           bullets.splice(l, 1);
 
           killAudio.play();
-          // setTimeout(() => {
-          //   killAudio.pause();
-          // }, 1200);
           score++;
         }
       }

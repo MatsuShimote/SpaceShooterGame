@@ -1,12 +1,16 @@
 class Enemy {
-  constructor(ctx, x, y, width, height, speed, img) {
+  static width = 32;
+  static height = 32;
+
+  constructor(ctx, x, y, speed, img) {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
-    this.width = width;
-    this.height = height;
     this.speed = speed;
     this.img = img;
+
+    this.width = Enemy.width;
+    this.height = Enemy.height;
   }
 
   draw() {
@@ -19,3 +23,5 @@ class Enemy {
     this.draw();
   }
 }
+
+export default Enemy;
