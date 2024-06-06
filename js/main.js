@@ -3,6 +3,7 @@ import Draw from "./Draw.js";
 import Keyboard from "./Keyboard.js";
 import { collision } from "./utils.js";
 import Sound from "./Sound.js";
+import Hud from "./Hud.js";
 
 const sound = new Sound();
 
@@ -18,15 +19,15 @@ canvas.height = window.innerHeight;
 
 ctx.font = "1em Arial";
 
-const k = new Keyboard(0 + Player.width, canvas.width - Player.width);
+const keyboard = new Keyboard(0 + Player.width, canvas.width - Player.width);
 
 document.addEventListener("keydown", (e) => {
   if (e.code === "ArrowRight" || e.code === "KeyD") {
-    k.toRight();
+    keyboard.toRight();
   }
 
   if (e.code === "ArrowLeft" || e.code === "KeyA") {
-    k.toLeft();
+    keyboard.toLeft();
   }
 });
 
@@ -45,7 +46,8 @@ function startGame() {
   const healthKits = [];
   const bullets = [];
 
-  const __player = new Player(ctx);
+  const hud = new Hud(ctx, canvas.width - 100);
+  const player = new Player(ctx);
 
   function createEnemyInterval(interval) {
     clearInterval(enemyIntervalId); // Clear any existing interval
@@ -67,14 +69,8 @@ function startGame() {
   function animate() {
     requestAnimationFrame(animate);
 
-    ctx.beginPath();
-    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    ctx.fillStyle = "Black";
-    ctx.fillText("Health: " + health, 5, 20);
-    ctx.fillText("Score: " + score, canvas.width - 100, 20);
-    ctx.fillText("Level: " + level, canvas.width - 100, 50);
-
-    __player.update();
+    hud.update({ health, level, score });
+    player.update();
 
     if (score === constScore && enemyIntervalId && constInterval > 0) {
       constInterval = constInterval - 100;
