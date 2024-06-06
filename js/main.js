@@ -36,6 +36,12 @@ document.addEventListener("keydown", (e) => {
 function startGame() {
   let score = 0;
   let health = 100;
+  let level = 0;
+  
+  
+  let enemyIntervalId = null; // Store the interval ID
+  var constScore = 5;
+  var constInterval = 1234;
 
   fireAudio.play();
   fireAudio.loop = true;
@@ -45,10 +51,21 @@ function startGame() {
   const bullets = [];
 
   const __player = new Player(ctx);
+  
 
-  setInterval(() => {
-    enemies.push(Draw.enemy(ctx));
-  }, 1234);
+  function createEnemyInterval(interval) {
+    clearInterval(enemyIntervalId); // Clear any existing interval
+    enemyIntervalId = setInterval(() => {
+      enemies.push(Draw.enemy(ctx));
+    }, interval); // Adjust the interval time as needed
+  }
+
+  createEnemyInterval(constInterval);
+
+
+  // setInterval(() => {
+  //   enemies.push(Draw.enemy(ctx));
+  // }, 1234);
 
   setInterval(() => {
     healthKits.push(Draw.healthKit(ctx));
@@ -66,8 +83,18 @@ function startGame() {
     ctx.fillStyle = "Black";
     ctx.fillText("Health: " + health, 5, 20);
     ctx.fillText("Score: " + score, canvas.width - 100, 20);
+    ctx.fillText("Level: " + level, canvas.width - 100, 50);
 
     __player.update();
+
+    if (score === constScore && enemyIntervalId && constInterval > 0) {
+      constInterval = constInterval - 100;
+      console.log(constInterval);
+      clearInterval(enemyIntervalId);
+      createEnemyInterval(constInterval);
+      constScore += 5;
+      level ++;
+    }
 
     for (let i = 0; i < bullets.length; i++) {
       bullets[i].update();
