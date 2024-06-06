@@ -7,6 +7,10 @@ class Mamau extends Enemy {
   constructor(ctx, x, y, speed) {
     super(ctx, x, y, speed, img);
   }
+
+  scorePoint() {
+    return 5;
+  }
 }
 
 export default Mamau;

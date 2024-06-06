@@ -7,6 +7,10 @@ class Xuliao extends Enemy {
   constructor(ctx, x, y, speed) {
     super(ctx, x, y, speed, img);
   }
+
+  scorePoint(){
+    return 2;
+  }
 }
 
 export default Xuliao;

@@ -40,7 +40,7 @@ function startGame() {
   
   
   let enemyIntervalId = null; // Store the interval ID
-  var constScore = 5;
+  var constScore = 50;
   var constInterval = 1234;
 
   fireAudio.play();
@@ -87,12 +87,11 @@ function startGame() {
 
     __player.update();
 
-    if (score === constScore && enemyIntervalId && constInterval > 0) {
+    if (score >= constScore && enemyIntervalId && constInterval > 0) {
       constInterval = constInterval - 100;
-      console.log(constInterval);
       clearInterval(enemyIntervalId);
       createEnemyInterval(constInterval);
-      constScore += 5;
+      constScore += 50;
       level ++;
     }
 
@@ -122,11 +121,11 @@ function startGame() {
     for (let j = enemies.length - 1; j >= 0; j--) {
       for (let l = bullets.length - 1; l >= 0; l--) {
         if (collision(enemies[j], bullets[l])) {
+          killAudio.play();
+          score += enemies[j].scorePoint();
+
           enemies.splice(j, 1);
           bullets.splice(l, 1);
-
-          killAudio.play();
-          score++;
         }
       }
     }
