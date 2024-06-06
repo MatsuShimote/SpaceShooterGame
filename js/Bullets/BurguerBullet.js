@@ -1,11 +1,12 @@
 import Bullet from "./Bullet.js";
 
-class BurguerBullet extends Bullet {
-  constructor(ctx, x, y, width, height, speed) {
-    const img = new Image();
-    img.src = "imgs/bullets/burguer.png";
+const img = new Image();
 
-    super(ctx, x, y, width, height, speed, img);
+img.src = "/imgs/bullets/burguer.png";
+
+class BurguerBullet extends Bullet {
+  constructor(ctx, x, y) {
+    super(ctx, x, y, img);
   }
 }
 

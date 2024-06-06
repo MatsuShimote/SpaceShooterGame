@@ -1,10 +1,12 @@
 import Bullet from "./Bullet.js";
 
+const img = new Image();
+
+img.src = "/imgs/bullets/donut.png";
+
 class DonutBullet extends Bullet {
-  constructor(ctx, x, y, width, height, speed) {
-    const img = new Image();
-    img.src = "imgs/bullets/donut.png";
-    super(ctx, x, y, width, height, speed, img);
+  constructor(ctx, x, y) {
+    super(ctx, x, y, img);
   }
 }
 
