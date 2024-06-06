@@ -2,12 +2,9 @@ import Player from "./Player.js";
 import Draw from "./Draw.js";
 import Keyboard from "./Keyboard.js";
 import { collision } from "./utils.js";
+import Sound from "./Sound.js";
 
-const kitAudio = new Audio("audio/healthKit.mp3");
-const killAudio = new Audio("audio/kill.mp3");
-const fireAudio = new Audio("audio/fire.mp3");
-const gameOver = new Audio("audio/gameOver.mp3");
-// const bckgMusic = new Audio("audio/background.m4a");
+const sound = new Sound();
 
 window.onerror = () => {
   return true;
@@ -37,21 +34,18 @@ function startGame() {
   let score = 0;
   let health = 100;
   let level = 0;
-  
-  
-  let enemyIntervalId = null; // Store the interval ID
-  var constScore = 5;
-  var constInterval = 1234;
 
-  fireAudio.play();
-  fireAudio.loop = true;
+  let enemyIntervalId = null; // Store the interval ID
+  let constScore = 5;
+  let constInterval = 1234;
+
+  sound.startLoop();
 
   const enemies = [];
   const healthKits = [];
   const bullets = [];
 
   const __player = new Player(ctx);
-  
 
   function createEnemyInterval(interval) {
     clearInterval(enemyIntervalId); // Clear any existing interval
@@ -61,11 +55,6 @@ function startGame() {
   }
 
   createEnemyInterval(constInterval);
-
-
-  // setInterval(() => {
-  //   enemies.push(Draw.enemy(ctx));
-  // }, 1234);
 
   setInterval(() => {
     healthKits.push(Draw.healthKit(ctx));
@@ -93,7 +82,7 @@ function startGame() {
       clearInterval(enemyIntervalId);
       createEnemyInterval(constInterval);
       constScore += 5;
-      level ++;
+      level++;
     }
 
     for (let i = 0; i < bullets.length; i++) {
@@ -112,7 +101,7 @@ function startGame() {
         health -= 5;
 
         if (health <= 0) {
-          gameOver.play();
+          sound.gameOver();
           alert("You DIED!\nYour score was " + score);
           startGame();
         }
@@ -125,7 +114,7 @@ function startGame() {
           enemies.splice(j, 1);
           bullets.splice(l, 1);
 
-          killAudio.play();
+          sound.kill();
           score++;
         }
       }
@@ -140,7 +129,7 @@ function startGame() {
         if (collision(healthKits[hh], bullets[hhh])) {
           healthKits.splice(hh, 1);
           bullets.splice(hhh, 1);
-          kitAudio.play();
+          sound.healthKit();
           health += 10;
         }
       }
