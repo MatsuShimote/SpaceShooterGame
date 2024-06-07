@@ -24,6 +24,10 @@ class Sound {
   }
 
   stopLoop() {
+    // TODO: not implement yet
+  }
+
+  stopLoop() {
     this.#fire.pause();
     this.#bg.pause();
   }
