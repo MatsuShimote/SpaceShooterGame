@@ -14,7 +14,7 @@ p {
 
 body {
     font-family: sans-serif;
-    background: url("imgs/road_0-1.png");
+    background: url("imgs/background.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -43,4 +43,8 @@ canvas {
 .menu h1 {
     color: red;
     margin-bottom: 16px;
+}
+
+.pause-menu {
+    display: none;
 }

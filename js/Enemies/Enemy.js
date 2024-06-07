@@ -1,13 +1,18 @@
+const img = new Image();
+img.src = "/imgs/sprites.png";
+
 class Enemy {
   static width = 32;
   static height = 32;
 
-  constructor(ctx, x, y, speed, img) {
+  constructor(ctx, x, y, speed, spriteX, spriteY) {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
     this.speed = speed;
-    this.img = img;
+    this.size = 32;
+    this.spriteX = spriteX;
+    this.spriteY = spriteY;
 
     this.width = Enemy.width;
     this.height = Enemy.height;
@@ -18,7 +23,17 @@ class Enemy {
    */
   draw() {
     this.ctx.beginPath();
-    this.ctx.drawImage(this.img, this.x, this.y);
+    this.ctx.drawImage(
+      img,
+      this.spriteX,
+      this.spriteY,
+      this.width,
+      this.height,
+      this.x,
+      this.y,
+      this.width,
+      this.height
+    );
   }
 
   update() {
