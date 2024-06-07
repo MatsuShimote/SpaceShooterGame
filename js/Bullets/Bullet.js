@@ -1,13 +1,18 @@
+const img = new Image();
+img.src = "/imgs/sprites.png";
+
 class Bullet {
   static width = 30;
   static height = 30;
 
-  constructor(ctx, x, y, img) {
+  constructor(ctx, x, y, spriteX, spriteY) {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
     this.img = img;
     this.speed = 10;
+    this.spriteX = spriteX;
+    this.spriteY = spriteY;
 
     this.width = Bullet.width;
     this.height = Bullet.height;
@@ -18,7 +23,17 @@ class Bullet {
    */
   draw() {
     this.ctx.beginPath();
-    this.ctx.drawImage(this.img, this.x, this.y, Bullet.width, Bullet.height);
+    this.ctx.drawImage(
+      img,
+      this.spriteX,
+      this.spriteY,
+      Bullet.width,
+      Bullet.height,
+      this.x,
+      this.y,
+      Bullet.width,
+      Bullet.height
+    );
   }
 
   update() {

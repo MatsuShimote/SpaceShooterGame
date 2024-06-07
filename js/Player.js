@@ -1,7 +1,7 @@
 import Keyboard from "./Keyboard.js";
 
 const img = new Image();
-img.src = "imgs/hero.png";
+img.src = "/imgs/sprites.png";
 
 class Player {
   static height = 32;
@@ -23,8 +23,14 @@ class Player {
     this.ctx.beginPath();
     this.ctx.drawImage(
       img,
+      25,
+      29,
+      44,
+      50,
       Keyboard.x - Player.width,
-      Keyboard.y - Player.height
+      Keyboard.y - Player.height,
+      48,
+      48
     );
   }
 

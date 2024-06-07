@@ -1,6 +1,6 @@
 const img = new Image();
 
-img.src = "/imgs/healthkit.png";
+img.src = "/imgs/sprites.png";
 
 class HealthKit {
   static width = 32;
@@ -21,7 +21,17 @@ class HealthKit {
    */
   draw() {
     this.ctx.beginPath();
-    this.ctx.drawImage(img, this.x, this.y);
+    this.ctx.drawImage(
+      img,
+      135,
+      34,
+      this.width,
+      this.height,
+      this.x,
+      this.y,
+      this.width,
+      this.height
+    );
   }
 
   update() {
