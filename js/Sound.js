@@ -23,7 +23,7 @@ class Sound {
     this.#bg.play();
     this.#bg.loop = true;
 
-    this.#bg.volume = 0.5;
+    this.#bg.volume = 0.1;
   }
 
   /**

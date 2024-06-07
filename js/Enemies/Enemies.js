@@ -49,13 +49,12 @@ class Enemies {
    */
   create() {
     const number = randomNumber(1, 3);
+    let enemy;
 
     for (let _ = 0; _ < 4; _++) {
       const x = Math.random() * (750 - Enemy.width);
       const y = -Enemy.height;
       const speed = Math.random() * 2;
-
-      let enemy;
 
       switch (number) {
         case 1:
@@ -71,9 +70,8 @@ class Enemies {
           // do nothing
           break;
       }
-
-      this.#enemies.push(enemy);
     }
+    this.#enemies.push(enemy);
   }
 }
 

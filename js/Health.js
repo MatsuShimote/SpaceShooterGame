@@ -16,10 +16,10 @@ class Health {
    * Diminui a vida atual pelo peso de hit do inimigo
    */
   hit(enemyHit) {
-    if(this.#health < enemyHit) {
-      this.#health = 0;
-    }else {
+    if(enemyHit < this.#health) {
       this.#health -= enemyHit;
+    } else {
+      this.#health -= 1;
     }
   }
 
