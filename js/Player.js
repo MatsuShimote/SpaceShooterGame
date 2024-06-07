@@ -16,6 +16,9 @@ class Player {
     this.width = Player.width;
   }
 
+  /**
+   * Atualiza posição do jogador
+   */
   draw() {
     this.ctx.beginPath();
     this.ctx.drawImage(

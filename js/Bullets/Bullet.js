@@ -13,6 +13,9 @@ class Bullet {
     this.height = Bullet.height;
   }
 
+  /**
+   * Atualiza a posição da bala
+   */
   draw() {
     this.ctx.beginPath();
     this.ctx.drawImage(this.img, this.x, this.y, Bullet.width, Bullet.height);
@@ -23,6 +26,9 @@ class Bullet {
     this.draw();
   }
 
+  /**
+   * Verifica se a bala colidiu com algo
+   */
   collide(item) {
     return (
       this.x < item.x + item.width &&

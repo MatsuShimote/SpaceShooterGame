@@ -13,28 +13,40 @@ class Enemies {
     this.#enemies = [];
   }
 
+  /**
+   * Retorna os inimigos que estão em tela
+   */
   get items() {
     return this.#enemies;
   }
 
-  add(enemy) {
-    this.#enemies.push(enemy);
-  }
-
+  /**
+   * Retorna um inimigo específico a partir de seu índice
+   */
   get(index) {
     return this.#enemies[index];
   }
 
+  /**
+   * Remove um inimigo especifico a partir de seu índice
+   */
   remove(index) {
     this.#enemies.splice(index, 1);
   }
 
+  /**
+   * Atualiza a posição de todos os inimigos
+   */
   update() {
     for (const enemy of this.#enemies) {
       enemy.update();
     }
   }
 
+  /**
+   * Cria um novo inimigo, escolhendo o seu tipo de forma randômica e calculando
+   * posição e velocidade
+   */
   create() {
     const number = randomNumber(1, 3);
 

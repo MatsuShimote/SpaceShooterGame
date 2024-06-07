@@ -17,6 +17,10 @@ class Bullets {
     this.#bullets = [];
   }
 
+  /**
+   * Atualiza a posição de todas as balas, se caso alguma estiver saindo da
+   * tela, ela é removida
+   */
   update() {
     for (let i = 0; i < this.#bullets.length; i++) {
       this.#bullets[i].update();
@@ -27,18 +31,31 @@ class Bullets {
     }
   }
 
+  /**
+   * Retorna as balas que estão em tela
+   */
   get items() {
     return this.#bullets;
   }
 
+  /**
+   * Retorna uma bala específica a partir de seu índice
+   */
   get(index) {
     return this.#bullets[index];
   }
 
+  /**
+   * Remove uma bala específica a partir de seu índice
+   */
   remove(index) {
     this.#bullets.splice(index, 1);
   }
 
+  /**
+   * Cria uma nova bala, escolhendo o seu tipo de forma randômica e calculando
+   * posição (para ser a mesma do personagem) e velocidade
+   */
   create() {
     const number = randomNumber(1, 5);
     const x = Keyboard.x - Bullet.width / 2;
