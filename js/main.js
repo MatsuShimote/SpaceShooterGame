@@ -1,9 +1,13 @@
 import Player from "./Player.js";
-import Draw from "./Draw.js";
 import Keyboard from "./Keyboard.js";
-import { collision } from "./utils.js";
 import Sound from "./Sound.js";
 import Hud from "./Hud.js";
+import Score from "./Score.js";
+import Level from "./Level.js";
+import Health from "./Health.js";
+import Bullets from "./Bullets/Bullets.js";
+import HealthKits from "./HealthKits/HealthKits.js";
+import Enemies from "./Enemies/Enemies.js";
 
 const sound = new Sound();
 
@@ -31,102 +35,92 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-function startGame() {
-  let score = 0;
-  let health = 100;
-  let level = 0;
+function createEnemyFactory(enemies) {
+  let intervalId;
 
-  let enemyIntervalId = null; // Store the interval ID
-  let constScore = 5;
-  let constInterval = 1234;
+  return (interval) => {
+    clearInterval(intervalId);
+    intervalId = setInterval(() => {
+      enemies.create();
+    }, interval);
+  };
+}
+
+function startGame() {
+  const score = new Score();
+  const level = new Level();
+  const health = new Health();
+  const enemies = new Enemies(ctx);
+  const healthKits = new HealthKits(ctx);
+  const bullets = new Bullets(ctx);
+  const hud = new Hud(ctx, canvas.width - 100);
+  const player = new Player(ctx);
+  const createEnemy = createEnemyFactory(enemies);
 
   sound.startLoop();
 
-  const enemies = [];
-  const healthKits = [];
-  const bullets = [];
-
-  const hud = new Hud(ctx, canvas.width - 100);
-  const player = new Player(ctx);
-
-  function createEnemyInterval(interval) {
-    clearInterval(enemyIntervalId); // Clear any existing interval
-    enemyIntervalId = setInterval(() => {
-      enemies.push(Draw.enemy(ctx));
-    }, interval); // Adjust the interval time as needed
-  }
-
-  createEnemyInterval(constInterval);
-
   setInterval(() => {
-    healthKits.push(Draw.healthKit(ctx));
+    healthKits.create();
   }, 15000);
 
   setInterval(() => {
-    bullets.push(Draw.bullet(ctx));
+    bullets.create();
   }, 200);
 
   function animate() {
     requestAnimationFrame(animate);
 
-    hud.update({ health, level, score });
+    hud.update({
+      health: health.value,
+      level: level.getLevel(),
+      score: score.value,
+    });
     player.update();
+    bullets.update();
+    healthKits.update();
+    enemies.update();
 
-    if (score >= constScore && enemyIntervalId && constInterval > 0) {
-      constInterval = constInterval - 100;
-      clearInterval(enemyIntervalId);
-      createEnemyInterval(constInterval);
-      constScore += 5;
-      level++;
+    if (score.value === level.getCeilScore()) {
+      level.toNextLevel();
+      createEnemy(level.getEnemiesIntervalInMs());
     }
 
-    for (let i = 0; i < bullets.length; i++) {
-      bullets[i].update();
-
-      if (bullets[i].y < 0) {
-        bullets.splice(i, 1);
-      }
+    if (level.isWin()) {
+      alert("You WIN!\n Your score was " + score.value);
+      return startGame();
     }
 
-    for (let k = 0; k < enemies.length; k++) {
-      enemies[k].update();
+    for (let k = 0; k < enemies.items.length; k++) {
+      if (enemies.get(k).y > window.innerHeight) {
+        enemies.remove(k);
+        health.hit(5);
 
-      if (enemies[k].y > innerHeight) {
-        enemies.splice(k, 1);
-        health -= 5;
-
-        if (health <= 0) {
+        if (health.isDead()) {
           sound.gameOver();
-          alert("You DIED!\nYour score was " + score);
-          startGame();
+          alert("You DIED!\nYour score was " + score.value);
+          return startGame();
         }
       }
     }
 
-    for (let j = enemies.length - 1; j >= 0; j--) {
-      for (let l = bullets.length - 1; l >= 0; l--) {
-        if (collision(enemies[j], bullets[l])) {
-          score += enemies[j].scorePoint();
-
-          enemies.splice(j, 1);
-          bullets.splice(l, 1);
-
+    for (let j = enemies.items.length - 1; j >= 0; j--) {
+      for (let l = bullets.items.length - 1; l >= 0; l--) {
+        if (bullets.get(l).collide(enemies.get(j))) {
+          enemies.remove(j);
+          bullets.remove(l);
           sound.kill();
+          score.add(1);
         }
       }
     }
 
-    for (let h = 0; h < healthKits.length; h++) {
-      healthKits[h].update();
-    }
-
-    for (let hh = healthKits.length - 1; hh >= 0; hh--) {
-      for (let hhh = bullets.length - 1; hhh >= 0; hhh--) {
-        if (collision(healthKits[hh], bullets[hhh])) {
-          healthKits.splice(hh, 1);
-          bullets.splice(hhh, 1);
+    for (let i = healthKits.items.length - 1; i >= 0; i--) {
+      for (let j = bullets.items.length - 1; j >= 0; j--) {
+        if (bullets.get(j).collide(healthKits.get(i))) {
+          healthKits.remove(i);
+          bullets.remove(j);
           sound.healthKit();
-          health += 10;
+          health.bump();
         }
       }
     }

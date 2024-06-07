@@ -22,6 +22,15 @@ class Bullet {
     this.y -= this.speed;
     this.draw();
   }
+
+  collide(item) {
+    return (
+      this.x < item.x + item.width &&
+      this.x + this.width > item.x &&
+      this.y < item.y + item.height &&
+      this.y + this.height > item.y
+    );
+  }
 }
 
 const b = new Bullet();
