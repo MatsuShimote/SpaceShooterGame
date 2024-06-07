@@ -11,6 +11,10 @@ class Mamau extends Enemy {
   scorePoint() {
     return 5;
   }
+
+  dealDamage() {
+    return 5;
+  }
 }
 
 export default Mamau;

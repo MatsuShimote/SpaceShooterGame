@@ -11,6 +11,10 @@ class Xuliao extends Enemy {
   scorePoint(){
     return 2;
   }
+
+  dealDamage() {
+    return 12;
+  }
 }
 
 export default Xuliao;

@@ -10,7 +10,11 @@ class Health {
   }
 
   hit(enemyHit) {
-    this.#health -= enemyHit;
+    if(this.#health < enemyHit) {
+      this.#health = 0;
+    }else {
+      this.#health -= enemyHit;
+    }
   }
 
   bump() {

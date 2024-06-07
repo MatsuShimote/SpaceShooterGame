@@ -8,6 +8,7 @@ import Health from "./Health.js";
 import Bullets from "./Bullets/Bullets.js";
 import HealthKits from "./HealthKits/HealthKits.js";
 import Enemies from "./Enemies/Enemies.js";
+// import Parallax from "https://cdn.jsdelivr.net/npm/parallax.js@v5.5.0/dist/parallax.min.js";
 
 const sound = new Sound();
 
@@ -92,8 +93,8 @@ function startGame() {
 
     for (let k = 0; k < enemies.items.length; k++) {
       if (enemies.get(k).y > window.innerHeight) {
+        health.hit(enemies.get(k).dealDamage());
         enemies.remove(k);
-        health.hit(5);
 
         if (health.isDead()) {
           sound.gameOver();

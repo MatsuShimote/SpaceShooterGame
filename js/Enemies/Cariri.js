@@ -10,8 +10,11 @@ class Cariri extends Enemy {
 
 
   scorePoint() {
-    console.log("cariri");
     return 1;
+  }
+
+  dealDamage() {
+    return 8;
   }
 }
 
