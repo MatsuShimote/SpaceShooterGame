@@ -16,6 +16,9 @@ class HealthKit {
     this.height = HealthKit.height;
   }
 
+  /**
+   * Atualiza a posição do health-kit
+   */
   draw() {
     this.ctx.beginPath();
     this.ctx.drawImage(img, this.x, this.y);

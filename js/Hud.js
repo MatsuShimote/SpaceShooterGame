@@ -4,6 +4,10 @@ class Hud {
     this.ctx = ctx;
   }
 
+  /**
+   * Atualiza o HUD do jogo, mostrando a vida, pontuação e nível atual da
+   * partida
+   */
   update({ health, score, level }) {
     this.ctx.beginPath();
     this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);

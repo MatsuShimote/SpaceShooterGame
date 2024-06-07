@@ -41,6 +41,10 @@ class Game {
     this.#status = "unstarted";
   }
 
+  /**
+   * Inicia o jogo, iniciando também o loop para a criação dos health-kits
+   * e balas
+   */
   play() {
     this.#status = "play";
     this.#healthKitIntervalId = setInterval(() => {
@@ -54,6 +58,11 @@ class Game {
     this.animate();
   }
 
+  /**
+   * Loop de animação, fazendo todas as validações necessárias para atualizar
+   * os personagens, as colisões, as estatísticas e confirmar se o usuário
+   * ganhou ou perdeu.
+   */
   animate() {
     requestAnimationFrame(animate);
 
@@ -114,6 +123,9 @@ class Game {
     this.animate();
   }
 
+  /**
+   * Pausa o loop de animação
+   */
   pause() {
     this.#status = "paused";
     this.#sound.stopLoop();
@@ -122,14 +134,24 @@ class Game {
     clearInterval(this.#enemiesIntervalId);
   }
 
+  /**
+   * Verifica se o jogo está pausado
+   */
   isPaused() {
     return this.#status === "paused";
   }
 
+  /**
+   * Verifica se o jogo já foi iniciado
+   */
   isUnstarted() {
     return this.#status === "unstarted";
   }
 
+  /**
+   * Volta ao inicio todos os estados internos do jogo, permitindo que o jogo
+   * comesse novamente do zero
+   */
   reset() {
     this.#status = "unstarted";
     menu.open();
@@ -144,6 +166,9 @@ class Game {
     this.#sound = new Sound();
   }
 
+  /**
+   * Cria loop de criação de inimigos, baseado no nível atual do usuário
+   */
   #createEnemy(interval) {
     clearInterval(this.#enemiesIntervalId);
     this.#enemiesIntervalId = setInterval(() => {

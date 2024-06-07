@@ -13,6 +13,9 @@ class Enemy {
     this.height = Enemy.height;
   }
 
+  /**
+   * Atualiza a posição do inimigo
+   */
   draw() {
     this.ctx.beginPath();
     this.ctx.drawImage(this.img, this.x, this.y);

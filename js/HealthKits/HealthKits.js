@@ -10,28 +10,39 @@ class HealthKits {
     this.#healthKits = [];
   }
 
+  /**
+   * Retorna os health-kits que estão em tela
+   */
   get items() {
     return this.#healthKits;
   }
 
+  /**
+   * Retorna um health-kit específico a partir de seu índice
+   */
   get(index) {
     return this.#healthKits[index];
   }
 
-  add(healthKit) {
-    this.#healthKits.push(healthKit);
-  }
-
+  /**
+   * Atualiza a posição de todos os health-kits
+   */
   update() {
     for (const healthKit of this.#healthKits) {
       healthKit.update();
     }
   }
 
+  /**
+   * Remove um health-kit especifico a partir de seu índice
+   */
   remove(index) {
     this.#healthKits.splice(index, 1);
   }
 
+  /**
+   * Cria um novo health-kit, calculando a sua posição e a sua velocidade
+   */
   create() {
     const x = Math.random() * (750 - Enemy.width);
     const y = -Enemy.height;
